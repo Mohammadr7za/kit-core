@@ -22,6 +22,8 @@ export const users = pgTable('user', {
   image: varchar('image', { length: 255 }),
   currentTeamId: varchar('current_team_id', { length: 255 }),
   customerId: varchar('customer_id', { length: 255 }).unique(),
+  mobile: varchar('mobile', { length: 12 }).unique(),
+  personalCode: varchar('personalCode', { length: 12 }),
   status: userStatusEnum('user_status'),
   createdAt: timestamp('created_at').defaultNow().notNull(),
   updatedAt: timestamp('updated_at')

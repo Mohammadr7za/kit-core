@@ -30,10 +30,10 @@ export const EmailLogin = () => {
     }
     //NOTE THIS IS ONLY FOR DEMO PURPOSE
     
-    //const response = await magicLogin(email.value);
+    const response = await magicLogin(email.value);
 
     
-    const response = await demoLogin(email.value);
+    // const response = await demoLogin(email.value);
 
     setIsLoading(false);
     if (!response.ok) {
@@ -41,15 +41,15 @@ export const EmailLogin = () => {
       return;
     }
 
-    //toast('Please check your email for a magic link.');
+    toast('Please check your email for a magic link.');
   };
 
   return (
     <form method="post" onSubmit={handleSubmit} className="space-y-2">
       <Box>
         <Input
-          readOnly={true}
-          value={demoMail}
+          // readOnly={true}
+          // value={demoMail}
           autoComplete="off"
           name="email"
           type="email"

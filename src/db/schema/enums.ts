@@ -13,6 +13,7 @@ export const SubscriptionStatus = z.enum(
 ).Enum;
 
 export const userStatusEnum = pgEnum('user_status', ['Active', 'Inactive']);
+export const logStatusEnum = pgEnum('log_status', ['Info', 'Warning', 'Error', 'Critical', 'Debug']);
 export const UserStatus = z.enum(userStatusEnum.enumValues).Enum;
 
 export const teamMemberStatusEnum = pgEnum('team_member_status', [
