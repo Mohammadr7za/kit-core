@@ -24,6 +24,7 @@ export default async function Page({
   searchParams: SearchParams;
 }) {
   const user = await getCurrentUser();
+  const cookieStore = await cookies()
 
   const { files, count } = await getFavouriteFiles({
     ...searchParams,
@@ -34,7 +35,7 @@ export default async function Page({
   );
 
   const tags = await getAllTags({ search: '' });
-  const defaultLayout = cookies().get('files-layout')?.value ?? 'grid';
+  const defaultLayout = cookieStore.get('files-layout')?.value ?? 'grid';
 
   return (
     <ShowFiles

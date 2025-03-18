@@ -6,6 +6,7 @@ import { generateCodeVerifier, generateState } from 'arctic';
 export async function GET(): Promise<Response> {
   const state = generateState();
   const codeVerifier = generateCodeVerifier();
+  const cookieStore = await cookies();
   const url = await google.createAuthorizationURL(state, codeVerifier, {
     scopes: ['email', 'profile'],
   });
@@ -19,9 +20,9 @@ export async function GET(): Promise<Response> {
     sameSite: 'lax',
   };
 
-  cookies().set('google_oauth_state', state, cookieConfig);
+  cookieStore.set('google_oauth_state', state, cookieConfig);
 
-  cookies().set('google_code_verifier', codeVerifier, cookieConfig);
+  cookieStore.set('google_code_verifier', codeVerifier, cookieConfig);
 
   return Response.redirect(url);
 }

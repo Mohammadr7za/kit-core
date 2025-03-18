@@ -59,8 +59,9 @@ export default async function Page({
   //   user?.id as string,
   //   user?.currentTeamId as string
   // );
+  const cookieStore = await cookies()
 
-  const defaultLayout = cookies().get('files-layout')?.value ?? 'grid';
+  const defaultLayout = cookieStore.get('files-layout')?.value ?? 'grid';
 
   // const tags = await getAllTags({ search: '' });
   // const permissions = await getUserPermission();

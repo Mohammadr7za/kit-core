@@ -29,6 +29,7 @@ export default async function Page({
 
   const parentId = Boolean(params.id) ? params.id : null;
   const folders = await getAllFolders(user.id, user.currentTeamId);
+  const cookieStore = await cookies()
 
   const tags = await getAllTags({ search: '' });
 
@@ -38,7 +39,7 @@ export default async function Page({
     user?.id
   );
   const availableStorage = totalStorage - totalUsed.bytes;
-  const defaultLayout = cookies().get('files-layout')?.value ?? 'grid';
+  const defaultLayout = cookieStore.get('files-layout')?.value ?? 'grid';
 
   return (
     <ShowFiles

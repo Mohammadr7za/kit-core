@@ -17,11 +17,12 @@ export default async function RootLayout({
 }) {
   const settings = await getAllSettings();
   const permissions = await getUserPermission();
+  const cookieStore = await cookies()
 
-  const defaultSizeCookies = cookies().get(
+  const defaultSizeCookies = cookieStore.get(
     'layout-resizable-panels:default-size'
   );
-  const defaultCollapsedCookies = cookies().get(
+  const defaultCollapsedCookies = cookieStore.get(
     'layout-resizable-panels:default-collapsed'
   );
 

@@ -19,7 +19,7 @@ export const getAllSettings = async () => {
 
 export const getSetting = async (key: string) => {
   const setting = await SettingsService.get(key);
-  revalidateTag('settings');
+  // revalidateTag('settings');
   return setting;
 };
 

@@ -20,11 +20,13 @@ export interface GoogleAuthResponse {
 }
 
 export async function GET(request: Request): Promise<Response> {
+  const cookieStore = await cookies()
+
   const url = new URL(request.url);
   const code = url.searchParams.get('code');
   const state = url.searchParams.get('state');
-  const storedState = cookies().get('google_oauth_state')?.value ?? null;
-  const codeVerifier = cookies().get('google_code_verifier')?.value ?? null;
+  const storedState = cookieStore.get('google_oauth_state')?.value ?? null;
+  const codeVerifier = cookieStore.get('google_code_verifier')?.value ?? null;
   if (
     !code ||
     !state ||
@@ -57,7 +59,7 @@ export async function GET(request: Request): Promise<Response> {
     if (existingUser) {
       const session = await lucia.createSession(existingUser.id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
+      cookieStore.set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
@@ -81,7 +83,7 @@ export async function GET(request: Request): Promise<Response> {
       // User object returned from createUser has an 'id' property
       const session = await lucia.createSession(dbUser.id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
+      cookieStore.set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes

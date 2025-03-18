@@ -56,6 +56,8 @@ export const AuthService = {
   },
   //NOTE : This will only be used for demo purpose
   demoLogin: async (email: string) => {
+    const cookieStore = await cookies()
+
     const user = await db.query.users.findFirst({
       where: eq(users.email, email),
     });
@@ -68,7 +70,7 @@ export const AuthService = {
 
       const session = await lucia.createSession(user.id, {});
       const sessionCookie = lucia.createSessionCookie(session.id);
-      cookies().set(
+      cookieStore.set(
         sessionCookie.name,
         sessionCookie.value,
         sessionCookie.attributes
