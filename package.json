@@ -3,7 +3,7 @@
   "version": "1.0.1",
   "private": true,
   "scripts": {
-    "dev": "pnpm db:seed && next dev",
+    "dev": "next dev --turbo",
     "dev:turbo": "pnpm db:seed && next dev --turbo",
     "build": "pnpm db:push && pnpm db:seed && next build",
     "build:check": "tsc --noEmit",

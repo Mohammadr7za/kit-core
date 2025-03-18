@@ -7,6 +7,12 @@
   /* light theme */
   /* --------------------------------- */
   :root {
+
+    --text-color: inherit;
+    --bg-alpha: inherit;
+    --radius: inherit;
+    --border: inherit;
+
     --background: 255 255 255; /* #ffffff */
     --foreground: 27 30 39; /* #1b1e27 */
     --muted: 234 237 241; /* #eaedf1 */
@@ -221,7 +227,7 @@
   @apply border-steel-700 bg-steel-700 ring-steel-700 dark:border-steel-600 dark:bg-steel-600/90 dark:ring-steel-600;
 }
 .checkbox-input:checked + span::before {
-  @apply absolute inset-auto ml-0.5 mt-[3px] flex h-[5px] w-2.5 border-2 border-r-0 border-t-0 border-steel-100 content-[''] dark:border-steel-100/60;
+  @apply absolute inset-auto mr-0.5 mt-[3px] flex h-[5px] w-2.5 border-2 border-r-0 border-t-0 border-steel-100 content-[''] dark:border-steel-100/60;
   transform: rotate(-45deg);
 }
 
@@ -281,7 +287,8 @@
   --blur: 10;
   --alpha: 0;
   --gradient: linear-gradient(to right, #8b18e8, #04a5cd);
-  --x: 0, --y: 0;
+  --x: 0;
+  --y: 0;
 }
 
 .gradient-border-inner::after,

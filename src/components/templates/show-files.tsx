@@ -396,7 +396,7 @@ export const ShowFiles = ({
         </Flex>
         <Flex
           className={cn(
-            'md:w-auto md:ml-auto gap-3 sm:mt-4',
+            'md:w-auto md:mr-auto gap-3 sm:mt-4',
             selectedFileFolderIds.length
               ? 'justify-between sm:justify-end'
               : 'justify-end'
