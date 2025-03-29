@@ -1,8 +1,27 @@
-import { getCurrentUser } from '@/lib/utils/session';
-import DummyPageTemplate from '@/components/templates/dummy-page-template';
+import { getAllLogs } from '@/server/actions/log.action';
 
-export default async function Page() {
-  const user = await getCurrentUser();
+import { FileSortType } from '@/config/sorting';
+import { CompleteFile } from '@/db/schema/files';
+import { FilesLayoutType } from '@/components/organisms/file-layout-switcher';
+import { ShowFiles } from '@/components/templates/show-files';
 
-  return <DummyPageTemplate />;
+type SearchParams = {
+  search?: string;
+  page?: number;
+  size?: number;
+  sort?: FileSortType;
+  status?: LogStatus;
+  type?: string;
+  tag?: string;
+};
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) {
+  const searchParams1 = await searchParams;
+  const [logs] = await Promise.all([getAllLogs()]);
+
+  return <></>
 }

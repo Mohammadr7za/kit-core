@@ -33,12 +33,11 @@ export default async function Page({
 }: {
   searchParams: SearchParams;
 }) {
-  const searchParams1 = await searchParams;
   const [user, currentTeam, { files, count }, tags, permissions] =
     await Promise.all([
       getCurrentUser(),
       getCurrentTeam(),
-      getFiles({ size: 50, ...searchParams1 }),
+      getFiles({ size: 50, ...searchParams }),
       getAllTags({ search: '' }),
       getUserPermission(),
     ]);
@@ -60,7 +59,7 @@ export default async function Page({
   //   user?.id as string,
   //   user?.currentTeamId as string
   // );
-  const cookieStore = await cookies();
+  const cookieStore = await cookies()
 
   const defaultLayout = cookieStore.get('files-layout')?.value ?? 'grid';
 
