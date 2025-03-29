@@ -39,7 +39,7 @@ const ManageTagsForm = ({ tags }: Props) => {
   };
 
   const handleEditTag = async (id: string, label: string) => {
-    const updatedTags = allTags.map((tag) => {
+    const updatedTags = allTags?.map((tag) => {
       if (tag.id === id) {
         return { ...tag, label };
       }
@@ -69,7 +69,7 @@ const ManageTagsForm = ({ tags }: Props) => {
         </Flex>
       </form>
 
-      {allTags.map((tag) => (
+      {allTags?.map((tag) => (
         <ManageTagItem
           key={tag.id}
           tag={tag}

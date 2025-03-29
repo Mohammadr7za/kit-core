@@ -6,7 +6,7 @@ import { ActionIcon, Drawer, Text, Title } from 'rizzui';
 import { useDrawer } from '@/lib/store/drawer.store';
 import { Flex } from '@/components/atoms/layout';
 
-export const RightDrawer = () => {
+export const LeftDrawer = () => {
   const { open, closeDrawer, component, title, description, props } =
     useDrawer();
 
@@ -17,6 +17,7 @@ export const RightDrawer = () => {
     <Drawer
       isOpen={open}
       onClose={closeDrawer}
+      placement='left'
       overlayClassName="!opacity-30 dark:!opacity-50"
       containerClassName="dark:bg-steel-800"
     >

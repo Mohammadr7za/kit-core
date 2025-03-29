@@ -1,9 +1,16 @@
-import { cookies } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { lucia } from '@/auth';
 import { db } from '@/db';
-import { users, UserStatus, verificationTokens } from '@/db/schema';
+import {
+  LogStatus,
+  NewLog,
+  users,
+  UserStatus,
+  verificationTokens,
+} from '@/db/schema';
 import AuthenticationEmail from '@/email-templates/authentication-email';
+import { LogService } from '@/server/service/log.service';
 import { render } from '@react-email/render';
 import { eq } from 'drizzle-orm';
 import { generateId } from 'lucia';
@@ -56,6 +63,9 @@ export const AuthService = {
     return { ok: true };
   },
   mobileLogin: async (mobile: string, password: string) => {
+    const header = await headers();
+    const ip = (header.get('x-forwarded-for') ?? '127.0.0.1').split(',')[0];
+
     let user = await db.query.users.findFirst({
       // where: and(eq(users.mobile, mobile), eq(users.password, password)),
       where: eq(users.mobile, mobile),
@@ -79,9 +89,33 @@ export const AuthService = {
           sessionCookie.attributes
         );
 
+        let log: NewLog = {
+          userId: user.id,
+          title: 'Logged In',
+          message: 'user Logged In',
+          context: JSON.stringify({ mobile }).toString(),
+          ip_address: ip,
+          request_url: 'login',
+          request_method: 'server action',
+          status: LogStatus.Info,
+        };
+        await LogService.create(log);
+
         return { ok: true };
       }
     }
+
+    let log: NewLog = {
+      userId: null,
+      title: 'Attempting to login',
+      message: 'cant not logged in',
+      context: JSON.stringify({ mobile }).toString(),
+      ip_address: ip,
+      request_url: 'login',
+      request_method: 'server action',
+      status: LogStatus.Warning,
+    };
+    await LogService.create(log);
 
     return { ok: false };
   },

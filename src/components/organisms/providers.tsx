@@ -10,7 +10,7 @@ import { SiteSettingsInput } from '@/lib/validations/site-settings.schema';
 import { ThemeProvider } from '@/components/molecules/theme-provider';
 import { Modal } from '@/components/organisms/modal';
 
-import { RightDrawer } from './right-drawer';
+import { LeftDrawer } from './right-drawer';
 
 hideRechartsConsoleError();
 
@@ -67,7 +67,7 @@ export function Providers({
         }}
       />
       <Modal />
-      <RightDrawer />
+      <LeftDrawer />
     </ThemeProvider>
   );
 }

@@ -14,6 +14,7 @@ export const PAGES = {
     ROOT: '/dashboard',
     FILES: '/dashboard/files',
     FAVOURITES: '/dashboard/files/favourites',
+    LOGS: '/dashboard/logs',
     TRASH: '/dashboard/files/trash',
     FOLDERS: '/dashboard/folders',
   },

@@ -6,6 +6,7 @@ import { TrashIcon } from '@/components/atoms/icons/dashboard/trash';
 
 import { PAGES } from './pages';
 import { TEAM_PAGES } from './teams';
+import { LogsIcon } from 'lucide-react';
 
 export type Menu = {
   name: string;
@@ -51,6 +52,11 @@ const SidebarMenuItems: Menu[] = [
     name: 'Favourites',
     href: PAGES.DASHBOARD.FAVOURITES,
     icon: FavouriteIcon,
+  },
+  {
+    name: 'Logs',
+    href: PAGES.DASHBOARD.LOGS,
+    icon: LogsIcon,
   },
   {
     name: 'Trash',

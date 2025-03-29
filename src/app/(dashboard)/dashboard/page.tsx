@@ -9,9 +9,11 @@ import Dashboard from '@/components/templates/dashboard';
 
 export const dynamic = 'force-dynamic';
 
-export default async function Page({ searchParams }: { searchParams: any }) {
+export default async function Page({ params }: any) {
   const currentTeam = await getCurrentTeam();
   const user = await getCurrentUser();
+  const { searchParams } = await params;
+
   const { files: allFiles } = await getFiles(
     { ...searchParams, size: 10 },
     { excludeByType: 'folder', allFiles: true }

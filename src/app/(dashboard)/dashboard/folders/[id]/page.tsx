@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { notFound } from 'next/navigation';
+import { notFound, useSearchParams } from 'next/navigation';
 import { CompleteBreadcrumbs, CompleteFile } from '@/db/schema';
 import { getAnalyticsData } from '@/server/actions/analytics.action';
 import { getAllFolders, getFolders } from '@/server/actions/folders.action';
@@ -13,14 +13,13 @@ import { ShowFiles } from '@/components/templates/show-files';
 
 export default async function Page({
   params,
-  searchParams,
 }: {
   params: { id: string };
-  searchParams: any;
 }) {
   const user = await getCurrentUser();
 
   isCuid(params.id) || notFound();
+  const searchParams = await useSearchParams()
 
   const { files, count, breadcrumbs } = await getFolders(params.id, {
     size: 50,

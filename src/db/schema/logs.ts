@@ -14,5 +14,5 @@ export const logs = pgTable('logs', {
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
 
-export type Logs = typeof logs.$inferSelect;
+export type Log = typeof logs.$inferSelect;
 export type NewLog = typeof logs.$inferInsert;

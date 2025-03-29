@@ -32,7 +32,7 @@ export function HamburgerButton({
       </ActionIcon>
       <Drawer
         isOpen={open}
-        placement="left"
+        placement="right"
         customSize={300}
         onClose={() => closeDrawer()}
         containerClassName="min-w-[300px]"
