@@ -9,6 +9,6 @@ export default async function Page({ searchParams }: { searchParams: any }) {
   if (session && session?.user) {
     redirect(PAGES.DASHBOARD.ROOT);
   }
-  let search = await searchParams.message;
-  return <LoginView message={search || ''} />;
+  let { message } = await searchParams;
+  return <LoginView message={message || ''} />;
 }

@@ -34,7 +34,7 @@ export const createMultipleTags = async (inputs: CombinedTagInput[]) => {
     await TagsService.detachAllTags(inputs[0].taggableId);
 
     const attached = await TagsService.attachTags(allTags);
-    revalidateTag('get-all-tags');
+    // revalidateTag('get-all-tags');
     return attached;
 
   } catch (error) {
@@ -52,7 +52,7 @@ export const createTag = async (input: TagInput) => {
       ownerId: user?.currentTeamId ? user?.currentTeamId : user?.id,
       ownerType: user?.currentTeamId ? TagOwnerType.team : TagOwnerType.user,
     });
-    revalidateTag('get-all-tags');
+    // revalidateTag('get-all-tags');
     return tag;
 
   } catch (error) {
@@ -65,18 +65,18 @@ export const getAllTags = async ({ search }: { search: string }) => {
   const user = await getCurrentUser();
   const ownerId = user?.currentTeamId ? user?.currentTeamId : user?.id;
   const tags = await TagsService.getTags({ search, ownerId });
-  revalidateTag('get-all-tags');
+  // revalidateTag('get-all-tags');
   return tags;
 };
 
 export const editTag = async (id: string, label: string) => {
   const tag = await TagsService.edit(id, { label });
-  revalidateTag('get-all-tags');
+  // revalidateTag('get-all-tags');
   return tag;
 };
 
 export const deleteTag = async (id: string) => {
   const tag = await TagsService.delete(id);
-  revalidateTag('get-all-tags');
+  // revalidateTag('get-all-tags');
   return tag;
 };

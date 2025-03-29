@@ -36,7 +36,7 @@ export const getRedirectUrl = async (
       teamId,
       redirectUrl
     );
-    revalidateTag('user-subscription');
+    // revalidateTag('user-subscription');
     return response;
   } catch (error) {
     return handleServerError(error);
@@ -51,7 +51,7 @@ export const getCurrentTeamSubscription = async () => {
       user.id,
       user.currentTeamId
     );
-    revalidateTag(`team-${user.currentTeamId}-subscription`);
+    // revalidateTag(`team-${user.currentTeamId}-subscription`);
     return subscription;
   } catch (error) {
     handleServerError(error);

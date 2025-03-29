@@ -57,7 +57,7 @@ export const createFolder = async (input: any) => {
     const isFolderExists = await FoldersService.isFolderExists(input);
     if (isFolderExists) {
       const folder = await FoldersService.create(input);
-      revalidateTag('get-files');
+      // revalidateTag('get-files');
       return folder;
     }
 
@@ -75,7 +75,7 @@ export const updateFolder = async (
     const data = applyValidation(UpdateFolderSchema, input);
 
     const profile = await FoldersService.update(folderId, data);
-    revalidateTag('get-files');
+    // revalidateTag('get-files');
     return profile;
 
   } catch (error) {
@@ -87,7 +87,7 @@ export const updateFolder = async (
 export const moveToTrash = async (id: string) => {
   try {
     const folder = await FoldersService.trash(id);
-    revalidateTag('get-files');
+    // revalidateTag('get-files');
     return folder;
   } catch (error) {
     return handleServerError(error);
@@ -97,7 +97,7 @@ export const moveToTrash = async (id: string) => {
 export const moveMultipleToTrash = async (ids: string[]) => {
   try {
     const folder = await FoldersService.trashMultiple(ids);
-    revalidateTag('get-files');
+    // revalidateTag('get-files');
     return folder;
   } catch (error) {
     return handleServerError(error);
@@ -108,7 +108,7 @@ export const emptyTrash = async () => {
 
   try {
     const folder = await FoldersService.emptyTrash();
-    revalidateTag('get-files');
+    // revalidateTag('get-files');
     return folder;
   } catch (error) {
     return handleServerError(error);
@@ -121,7 +121,7 @@ export const folderDelete = async (id: string) => {
   try {
     const folder = await FoldersService.delete(id);
 
-    revalidateTag('get-files');
+    // revalidateTag('get-files');
     return folder;
 
   } catch (error) {
@@ -133,20 +133,20 @@ export const folderDelete = async (id: string) => {
 export const folderRestore = async (id: string) => {
   const folder = await FoldersService.restore(id);
 
-  revalidateTag('get-files');
+  // revalidateTag('get-files');
   return folder;
 };
 
 export const getAllFolders = async (userId: string, teamId: string | null, options?: {}) => {
   const folders = await FoldersService.getAll(userId, teamId, options);
-  revalidateTag('get-files');
+  // revalidateTag('get-files');
   return folders;
 };
 
 export const moveFolder = async (id: string, folderID: string | null, moveFromFolderID: string | null, fileSize: number | null) => {
   try {
     const move = await FoldersService.moveFolder(id, folderID, moveFromFolderID, fileSize);
-    revalidateTag('get-files');
+    // revalidateTag('get-files');
     return move;
 
   } catch (error) {
@@ -157,11 +157,11 @@ export const moveFolder = async (id: string, folderID: string | null, moveFromFo
 
 export const increaseFolderSize = async (folderID: string, fileSize: number) => {
   const updateSize = await FilesService.updateFolderSize(folderID, fileSize, FolderSizeUpdateType.increase);
-  revalidateTag('get-files');
+  // revalidateTag('get-files');
   return updateSize
 }
 export const decreaseFolderSize = async (folderID: string, fileSize: number) => {
   const updateSize = await FilesService.updateFolderSize(folderID, fileSize, FolderSizeUpdateType.decrease);
-  revalidateTag('get-files');
+  // revalidateTag('get-files');
   return updateSize
 }

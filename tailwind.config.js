@@ -121,7 +121,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        geist: ['var(--font-geist-sans)'],
+        geist: ['iranSans', 'var(--font-geist-sans)'],
       },
       boxShadow: {
         left: ' -1px 0px 3px 0 rgb(0,0,0 / 0.16), -1px 0px 2px -1px rgb(0,0,0 / 0.16)',

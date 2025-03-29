@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "iranSans";
+  src: url("../../public/assets/fonts/iran-sans.ttf");
+}
+
 @layer base {
   /* --------------------------------- */
   /* light theme */
@@ -117,11 +122,13 @@
   * {
     @apply antialiased;
   }
+
   html {
     @apply h-full bg-background !pr-0 antialiased;
   }
   body {
     @apply flex min-h-full flex-col overflow-x-hidden text-sm text-foreground;
+    font-family: "iranSans" !important;
   }
   input::-ms-clear,
   input::-ms-reveal {

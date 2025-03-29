@@ -22,7 +22,7 @@ export const handleContact = async (input: ContactUsInput) => {
     const data = applyValidation(ContactUsSchema, input);
     const from = `${data.name}<${data.email}>`;
     const contact = await ContactService.create(data);
-    revalidateTag('get-all-contacts');
+    // revalidateTag('get-all-contacts');
     const settingsEmail = await SettingsService.get('email');
 
     if (null === settingsEmail) {
@@ -44,6 +44,6 @@ export const handleContact = async (input: ContactUsInput) => {
 
 export const getAllContact = async (params: any) => {
   const contacts = await ContactService.getContacts(params);
-  revalidateTag('get-all-contacts');
+  // revalidateTag('get-all-contacts');
   return contacts;
 };

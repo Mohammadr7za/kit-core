@@ -13,7 +13,7 @@ import { handleServerError } from '@/lib/utils/error';
 
 export const getAllSettings = async () => {
   const settings = await SettingsService.getAll();
-  revalidateTag('settings');
+  // revalidateTag('settings');
   return settings;
 };
 
@@ -27,7 +27,7 @@ export const updateSettings = async (input: SiteSettingsInput) => {
   try {
     const data = applyValidation(SiteSettingsSchema, input);
     const settings = await SettingsService.createOrUpdate(data);
-    revalidateTag('settings');
+    // revalidateTag('settings');
     return settings;
 
   } catch(error) {

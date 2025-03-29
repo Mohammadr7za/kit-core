@@ -33,8 +33,8 @@ export const addTeam = async (input: TeamInput) => {
     const data = applyValidation(CreateTeamSchema, input);
     const user = await getCurrentUser();
     const team = await TeamService.createTeam(user.id, data.name);
-    revalidateTag('get-my-teams');
-    revalidateTag('current-team');
+    // revalidateTag('get-my-teams');
+    // revalidateTag('current-team');
     return team;
   } catch (error) {
     return handleServerError(error);
@@ -46,8 +46,8 @@ export const updateTeam = async (teamId: string, input: TeamSettingsInput) => {
     const data = applyValidation(TeamSettingsSchema, input);
     const user = await getCurrentUser();
     const team = await TeamService.updateTeam(teamId, data, user?.id as string);
-    revalidateTag('get-my-teams');
-    revalidateTag('current-team');
+    // revalidateTag('get-my-teams');
+    // revalidateTag('current-team');
     return team;
   } catch (error) {
     return handleServerError(error);
@@ -57,7 +57,7 @@ export const updateTeam = async (teamId: string, input: TeamSettingsInput) => {
 export const deleteTeam = async (teamId: string) => {
   const user = await getCurrentUser();
   const team = await TeamService.deleteTeam(teamId, user?.id as string);
-  revalidateTag('get-my-teams');
+  // revalidateTag('get-my-teams');
   return team;
 };
 
@@ -283,12 +283,12 @@ export const exportAllTeams = async (params: any) => {
 };
 export async function deleteAllTeams(teamIds: string[]) {
   const team = await TeamService.bulkDelete(teamIds);
-  revalidateTag('get-my-teams');
+  // revalidateTag('get-my-teams');
   return team;
 }
 
 export async function removeAllMembers(membersIds: string[]) {
   const members = await TeamService.removeMembers(membersIds);
-  revalidateTag('get-my-teams');
+  // revalidateTag('get-my-teams');
   return members;
 }

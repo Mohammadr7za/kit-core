@@ -45,7 +45,7 @@ export async function getFiles(
     allFiles: options?.allFiles,
   };
   const files = await FilesService.getFiles(params, filesOptions);
-  revalidateTag('get-files');
+  // revalidateTag('get-files');
   return files;
 }
 
@@ -106,8 +106,8 @@ export async function getTrashFiles(params: any) {
 export async function getFavouriteFiles(params: any) {
   const user = await getCurrentUser();
   const teamId = Boolean(user?.currentTeamId) ? user?.currentTeamId : null;
-  revalidateTag('get-all-files');
-  revalidateTag('get-files');
+  // revalidateTag('get-all-files');
+  // revalidateTag('get-files');
   return await FilesService.getFavouriteFiles(params, user?.id, teamId);
 }
 
@@ -127,29 +127,29 @@ export const uploadFile = async (inputs: any) => {
   }
 
   const files = await FilesService.uploadFile(create);
-  revalidateTag('get-files');
-  revalidateTag('get-all-files');
+  // revalidateTag('get-files');
+  // revalidateTag('get-all-files');
   return files;
 };
 
 export const shareFile = async (id: string) => {
   const file = await FilesService.shareFile(id);
-  revalidateTag('get-files');
+  // revalidateTag('get-files');
   return file;
 };
 
 export const makeFilePrivate = async (id: string) => {
   const file = await FilesService.makePrivate(id);
-  revalidateTag('get-files');
-  revalidateTag('get-all-files');
+  // revalidateTag('get-files');
+  // revalidateTag('get-all-files');
   return file;
 };
 
 export const makeFileFavourite = async (id: string, flag: boolean) => {
   try {
     const file = await FilesService.makeFavourite(id, flag);
-    revalidateTag('get-files');
-    revalidateTag('get-all-files');
+    // revalidateTag('get-files');
+    // revalidateTag('get-all-files');
     return file;
   } catch (error) {
     return handleServerError(error);
@@ -170,7 +170,7 @@ export const duplicateFile = async (file: any) => {
       delete file.createdAt;
       delete file.updatedAt;
       const duplicatedFile = await FilesService.uploadFile([file]);
-      revalidateTag('get-files');
+      // revalidateTag('get-files');
       return duplicatedFile;
     }
   }
@@ -178,7 +178,7 @@ export const duplicateFile = async (file: any) => {
 
 export const deleteAllTrashedFiles = async (fileIds: string[]) => {
   const files = await FilesService.bulkFilesDelete(fileIds);
-  revalidateTag('get-files');
-  revalidateTag('get-all-files');
+  // revalidateTag('get-files');
+  // revalidateTag('get-all-files');
   return files;
 };

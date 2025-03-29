@@ -15,7 +15,7 @@ export const createComment = async (input: CommentInput) => {
     const data = applyValidation<CommentInput>(CreateCommentsSchema, input);
 
     const comment = await CommentsService.create(data);
-    revalidateTag('get-files');
+    // revalidateTag('get-files');
     return comment;
   } catch (error) {
     return handleServerError(error);
@@ -31,7 +31,7 @@ export async function getCommentsByCommentableId(
     commentType,
   );
 
-  revalidateTag(`comment-by-${commentableId}`);
+  // revalidateTag(`comment-by-${commentableId}`);
 
   return comments;
 }
@@ -39,7 +39,7 @@ export async function getCommentsByCommentableId(
 export async function updateComment(commentId: string, input: any) {
   try {
     const comment = await CommentsService.update(commentId, input);
-    revalidateTag(`update-comment-${commentId}`);
+    // revalidateTag(`update-comment-${commentId}`);
     return comment;
   } catch (error) {
     return handleServerError(error);
@@ -49,7 +49,7 @@ export async function updateComment(commentId: string, input: any) {
 export const deleteComment = async (commentId: string) => {
   try {
     const comment = await CommentsService.delete(commentId);
-    revalidateTag(`delete-comments-${commentId}`);
+    // revalidateTag(`delete-comments-${commentId}`);
     return comment;
   } catch (error) {
     return handleServerError(error);

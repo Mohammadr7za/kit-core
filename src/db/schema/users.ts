@@ -20,6 +20,7 @@ export const users = pgTable('user', {
   googleId: varchar('google_id', { length: 255 }).unique(),
   emailVerified: boolean('email_verified').default(false),
   image: varchar('image', { length: 255 }),
+  password: varchar('password'),
   currentTeamId: varchar('current_team_id', { length: 255 }),
   customerId: varchar('customer_id', { length: 255 }).unique(),
   mobile: varchar('mobile', { length: 12 }).unique(),

@@ -82,7 +82,7 @@ export default async function LoginView({ message }: { message?: string }) {
             </Box>
           </Box>
           <Text className="text-center 3xl:text-base text-custom-black dark:text-custom-border">
-            @{new Date().getFullYear()}&nbsp;{APP_NAME}
+            {new Date().getFullYear()}&nbsp;{APP_NAME}@
           </Text>
         </Box>
       </Flex>

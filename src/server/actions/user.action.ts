@@ -18,17 +18,21 @@ import {
 } from '@/lib/validations/user.schema';
 
 import { BillingService } from '../service';
+import { createHash } from '@/lib/utils/crypt';
+import { db } from '@/db';
+import { users } from '@/db/schema/users';
+import { eq } from 'drizzle-orm';
 
 export const getAllUsers = async () => {
   const users = await UserService.getAll();
-  revalidateTag('get-all-users');
+  // revalidateTag('get-all-users');
   return users;
 };
 
 export const me = async () => {
   const user = await getCurrentUser();
   const profile = await UserService.getUserDetails(user.id);
-  revalidateTag('profile');
+  // revalidateTag('profile');
   return profile;
 };
 
@@ -37,7 +41,7 @@ export const updateProfile = async (input: UpdateProfileInput) => {
     const data = applyValidation(UpdateProfileSchema, input);
     const user = await getCurrentUser();
     const profile = await UserService.update(user?.id as string, data);
-    revalidateTag('profile');
+    // revalidateTag('profile');
     return profile;
   } catch (error) {
     return handleServerError(error);
@@ -48,7 +52,7 @@ export const updateUser = async (userId: string, input: UpdateUserInput) => {
   try {
     const data = applyValidation(UpdateUserSchema, input);
     const profile = await UserService.update(userId, data);
-    revalidateTag('get-users');
+    // revalidateTag('get-users');
     return profile;
   } catch (error) {
     return handleServerError(error);
@@ -64,7 +68,7 @@ export const updateCurrentTeam = async (teamId: string | null) => {
     user?.id as string,
     teamId
   );
-  revalidateTag(`current-team`);
+  // revalidateTag(`current-team`);
   return profile;
 };
 
@@ -76,7 +80,7 @@ export const getUsers = async (params: any) => {
 export const deleteUser = async (id: string) => {
   try {
     const user = await UserService.delete(id);
-    revalidateTag('get-users');
+    // revalidateTag('get-users');
     return user;
   } catch (error) {
     return handleServerError(error);
@@ -87,7 +91,15 @@ export const createUser = async (input: CreateUserInput) => {
   try {
     const user = await UserService.create(input);
 
-    revalidateTag('get-users');
+
+    // let hashPass = await createHash(password);
+    // console.log("hashPass", hashPass);
+    // console.log("mobile", mobile);
+    // let res = await db.update(users)
+    //   .set({ password: hashPass })
+    //   .where(eq(users.mobile, mobile)).returning();
+
+    // revalidateTag('get-users');
     return user;
   } catch (error) {
     return handleServerError(error);
@@ -122,6 +134,6 @@ export const exportUsers = async (params: any) => {
 export const getCurrentSubscription = async () => {
   const user = await getCurrentUser();
   const planId = await BillingService.getActiveSubscription(user?.id as string);
-  revalidateTag('user-subscription');
+  // revalidateTag('user-subscription');
   return planId;
 };
